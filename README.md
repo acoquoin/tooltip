@@ -1,4 +1,3 @@
-# tooltip
-Vanilla JS Toolip (HTML support)
+#  Lightweight Vanilla JS Toolip (HTML support)
 
 Demo + Doc to come
