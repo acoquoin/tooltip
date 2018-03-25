@@ -54,12 +54,8 @@ class tooltip {
         this.target.style.top = top + 'px';
     }
     setListeners() {
-        this.element.onmouseover = this.toggle.bind(this, true);
-        this.element.onmouseout = this.toggle.bind(this, false);
+        this.element.onmouseenter = this.toggle.bind(this, true);
+        this.element.onmouseleave = this.toggle.bind(this, false);
         this.element.onclick = this.toggle.bind(this, false);
     }
-}
-
-for (element of document.querySelectorAll('[title]')) {
-    let tooltipInstance = new tooltip(element);
 }
