@@ -1,0 +1,41 @@
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; margin: 0; padding: 0;  }
+body { background-color: #F9F9F9; font: 12px/1.5 sans-serif; padding: 50px; text-rendering: optimizeLegibility; }
+
+#tooltip {
+    text-align: left;
+    color: #FFF;
+    background: rgba(0, 0, 0, .75);
+    position: absolute;
+    z-index: 2;
+    padding: 5px;
+    max-width: 340px;
+    word-break: break-all;
+    font-size: 10px;
+    opacity: 0;
+}
+#tooltip::after {
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid rgba(0, 0, 0, .75);
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    margin-left: -5px;
+}
+#tooltip.top::after {
+    border-top-color: transparent;
+    border-bottom: 5px solid rgba(0, 0, 0, .75);
+    top: -10px;
+    bottom: auto;
+}
+#tooltip.left::after {
+    left: 10px;
+    margin: 0;
+}
+#tooltip.right::after {
+    right: 10px;
+    left: auto;
+    margin: 0;
+}
