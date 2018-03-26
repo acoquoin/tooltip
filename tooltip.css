@@ -1,5 +1,5 @@
 /* CORE */
-#tooltip {
+[id^=tooltip] {
     position: fixed;
     z-index: 2147483647;
     opacity: 0;
@@ -8,7 +8,7 @@
     pointer-events: none;
 }
 /* STYLE */
-#tooltip {
+[id^=tooltip] {
     text-align: left;
     color: #FFF;
     background: rgba(0, 0, 0, .75);
@@ -18,10 +18,10 @@
     transition:opacity 0.2s ease-in-out;
     margin-top: 5px;
 }
-#tooltip.bottom {
+[id^=tooltip].bottom {
     margin-top: -5px;
 }
-#tooltip::after {
+[id^=tooltip]::after {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-bottom: 5px solid rgba(0, 0, 0, .75);
@@ -31,12 +31,12 @@
     top: -5px;
     pointer-events: none;
 }
-#tooltip.bottom::after {
+[id^=tooltip].bottom::after {
     bottom: -5px;
     top: auto;
     transform: rotate(180deg);
 }
-#tooltip.right::after {
+[id^=tooltip].right::after {
     right: 5px;
     left: auto;
 }
