@@ -2,9 +2,9 @@ class tooltip {
     /**
      * constructor
      * @param {HTMLElement} element - The element to bind
-     * @param {string} target - The tooltip id
+     * @param {string} name - The tooltip name, append to the id
      */
-    constructor(element, target = 'tooltip') {
+    constructor(element, name = '') {
         // get the element
         this.element = element;
         // store the data-title and tim it
@@ -17,11 +17,11 @@ class tooltip {
         this.element.onmouseenter = this.show.bind(this);
         this.element.onmouseleave = this.hide.bind(this);
         // get the tooltip element
-        this.target = document.getElementById(target);
+        this.target = document.getElementById(['tooltip', name].filter(String).join('-'));
         // if not, create it
         if (this.target === null) {
             this.target = document.createElement('div');
-            this.target.id = target;
+            this.target.id = ['tooltip', name].filter(String).join('-');
             document.body.appendChild(this.target);
         }
     }
