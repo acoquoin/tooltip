@@ -1,61 +1,56 @@
 class tooltip {
-    constructor(element) {
+    /**
+     * constructor
+     * @param {HTMLElement} element - The element to bind
+     * @param {string} target - The tooltip id
+     */
+    constructor(element, target = 'tooltip') {
+        // get the element
         this.element = element;
-        this.init();
-        this.setListeners();
-    }
-    init() {
-        this.title = (this.element.title || this.element.getAttribute('title') || '').trim();
+        // store the data-title and tim it
+        this.title = (this.element.dataset.title || '').trim();
+        // if the title isn't set or empty, break
         if (this.title.length === 0) {
             return false;
         }
-        this.target = document.getElementById('tooltip');
+        // add onmouseenter and onmouseleave listerner
+        this.element.onmouseenter = this.show.bind(this);
+        this.element.onmouseleave = this.hide.bind(this);
+        // get the tooltip element
+        this.target = document.getElementById(target);
+        // if not, create it
         if (this.target === null) {
             this.target = document.createElement('div');
-            this.target.id = 'tooltip';
+            this.target.id = target;
             document.body.appendChild(this.target);
         }
     }
-    toggle(state = true) {
-        if (state === true) {
-            this.element.removeAttribute('title');
-            this.target.innerHTML = this.title;
-            this.setPosition();
-            this.target.style.opacity = 1;
-        } else {
-            this.target.style.opacity = 0;
-            this.element.setAttribute('title', this.title);
-            this.target.removeAttribute('class');
-            this.target.removeAttribute('style');
-        }
+    /**
+     * show the tooltip
+     */
+    show() {
+        // set the title into the tooltip
+        this.target.innerHTML = this.title;
+        // get the element offset relative to the client window
+        const offset = this.element.getBoundingClientRect();
+        // check the top and left position
+        const top = offset.top < window.innerHeight / 2;
+        const left = offset.left < window.innerWidth / 2;
+        // add some classes
+        this.target.classList.add(top ? 'top' : 'bottom');
+        this.target.classList.add(left ? 'left' : 'right');
+        // set positions
+        this.target.style.top = (top ? offset.bottom : offset.top - this.target.offsetHeight) + 'px';
+        this.target.style.left = (left ? offset.left : offset.right - this.target.offsetWidth) + 'px';
+        // display
+        this.target.style.opacity = 1;
     }
-    setPosition() {
-        var offset = this.element.getBoundingClientRect();
-        var of = {top: 0, left: 0};
-        of.top = offset.top + (window.pageYOffset || document.documentElement.scrollTop);
-        of.left = offset.left + (window.pageXOffset || document.documentElement.scrollLeft);
-
-        var left = of.left + (this.element.offsetWidth / 2) - (this.target.offsetWidth / 2);
-        var top = of.top - this.target.offsetHeight - 10;
-
-        if (left < 0) {
-            left = of.left + (this.element.offsetWidth / 2) - 15;
-            this.target.classList.add('left');
-        }
-        if (left + this.target.offsetWidth > window.innerWidth) {
-            left = of.left - this.target.offsetWidth + (this.element.offsetWidth / 2) + 20;
-            this.target.classList.add('right');
-        }
-        if (top < 0) {
-            top = of.top + this.element.offsetHeight + 5;
-            this.target.classList.add('top');
-        }
-        this.target.style.left = left + 'px';
-        this.target.style.top = top + 'px';
-    }
-    setListeners() {
-        this.element.onmouseenter = this.toggle.bind(this, true);
-        this.element.onmouseleave = this.toggle.bind(this, false);
-        this.element.onclick = this.toggle.bind(this, false);
+    /**
+     * hide the tooltip
+     */
+    hide() {
+        // remove classes
+        this.target.removeAttribute('class');
+        this.target.removeAttribute('style');
     }
 }
