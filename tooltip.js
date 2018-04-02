@@ -1,14 +1,15 @@
-class tooltip {
+class Tooltip {
     /**
      * constructor
      * @param {HTMLElement} element - The element to bind
-     * @param {string} name - The tooltip name, append to the id
+     * @param {string} title - The tooltip callback
+     * @param {string} selector - The tooltip selector, append to the id
      */
-    constructor(element, name = '') {
+    constructor(element, title, selector = null) {
         // get the element
         this.element = element;
-        // store the data-title and tim it
-        this.title = (this.element.dataset.title || '').trim();
+        // store the data-title or the title callback
+        this.title = 'function' === typeof title ? title() : this.element.dataset.title;
         // if the title isn't set or empty, break
         if (this.title.length === 0) {
             return false;
@@ -17,11 +18,12 @@ class tooltip {
         this.element.onmouseenter = this.show.bind(this);
         this.element.onmouseleave = this.hide.bind(this);
         // get the tooltip element
-        this.target = document.getElementById(['tooltip', name].filter(String).join('-'));
+        selector = ['tooltip', selector].filter(String).join('-');
+        this.target = document.getElementById(selector);
         // if not, create it
         if (this.target === null) {
             this.target = document.createElement('div');
-            this.target.id = ['tooltip', name].filter(String).join('-');
+            this.target.id = selector;
             document.body.appendChild(this.target);
         }
     }
@@ -34,8 +36,7 @@ class tooltip {
         // get the element offset relative to the client window
         const offset = this.element.getBoundingClientRect();
         // check the top and left position
-        const top = offset.top < window.innerHeight / 2;
-        const left = offset.left < window.innerWidth / 2;
+        let top = offset.top < window.innerHeight / 2, left = offset.left < window.innerWidth / 2;
         // add some classes
         this.target.classList.add(top ? 'top' : 'bottom');
         this.target.classList.add(left ? 'left' : 'right');
