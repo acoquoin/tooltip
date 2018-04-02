@@ -36,7 +36,8 @@ class Tooltip {
         // get the element offset relative to the client window
         const offset = this.element.getBoundingClientRect();
         // check the top and left position
-        let top = offset.top < window.innerHeight / 2, left = offset.left < window.innerWidth / 2;
+        let top = offset.top < window.innerHeight / 2,
+            left = offset.left < window.innerWidth / 2;
         // add some classes
         this.target.classList.add(top ? 'top' : 'bottom');
         this.target.classList.add(left ? 'left' : 'right');
