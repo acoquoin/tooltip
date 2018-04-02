@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <title>Tooltip: Lightweight Vanilla JS Toolip (HTML support)</title>
+        <style type="text/css">
+            *, *:before, *:after { box-sizing: border-box;margin: 0; padding: 0; }
+            body {
+                color: #373737;
+                background: linear-gradient(to bottom, #000 0px, #444 100%), linear-gradient(to bottom, #444 0px, #000 100%);
+                background-position: 0 0,0 100%;
+                background-size: 100% 250px, 100% 100px;
+                background-repeat: no-repeat, no-repeat;
+                font: 14px/1.5 sans-serif;
+            }
+            main a { display: inline-block; text-decoration: none; border-bottom: 1px dotted #666; color: inherit;  }
+            main a:hover, main a:focus { border-bottom: 1px solid #09F; }
+            header { max-width:960px;margin:0 auto; color:#FFF;margin-bottom:20px;font-size:18px; }
+            header p { text-align: right; }
+            h1, h2, h3, h4, h5, h6 { margin: 10px 0; font-weight: 700; }
+            header h2 { color:#CCC; }
+            main {  max-width:960px;margin:0 auto; background-color:#FFF;box-shadow: 0 0 20px 0 rgba(0, 0, 0, .25);padding: 20px }
+            footer { max-width:960px;margin:20px auto; color:#FFF;text-align:center }
+            footer a { display: inline-block; text-decoration: none; border-bottom: 1px dotted #666; color: inherit;  }
+            footer a:hover, main a:focus { border-bottom: 1px solid #09F; }
+            
+header p button {
+    border:0;
+    background-color: #09F;
+    font-weight:bold;
+    padding:10px;
+    line-height: 24px;
+    cursor: pointer;
+}
+header p button:hover {
+    background-color: #06F;
+    transition: background-color 250ms linear;
+}
+header p button a {
+    text-decoration: none;
+    color:#FFF;
+}
+header p button i {
+    color: #000;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border: solid 2px #FFF;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+header p button i:before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    margin-left: -1px;
+    height: 12px;
+    border-right: solid 2px #FFF;
+}
+header p button i:after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-top: solid 2px #FFF;
+    border-right: solid 2px #FFF;
+    transform: rotate(135deg);
+}
+
+section h1 { border-bottom: 2px solid #09F; }
+section p { margin-bottom: 20px; }
+section pre {
+
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    background-color: #EEE;
+    border:2px solid #DDD; 
+    border-left:10px solid #DDD; 
+    padding:20px;
+    color: #666;
+}
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Tooltip</h1>
+            <h2>Lightweight Vanilla JS Toolip (HTML support)</h2>
+            <p><button><a href="#"><i></i> Download tooltip.zip</a></button></p>
+        </header>
+        <main>
+            <section>
+                <h1>Introduction</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec turpis elit, eleifend sed velit a, feugiat pulvinar purus. Nunc id mi ac massa sodales aliquam. Morbi egestas quam sed dolor porttitor, quis eleifend dolor suscipit. Mauris sapien lorem, vulputate ac eleifend non, imperdiet quis magna. Phasellus fermentum est ut nibh lacinia, vitae viverra lacus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas erat diam, placerat at dignissim ut, rutrum quis turpis. Sed vulputate nulla vitae dui commodo, in euismod nisi ullamcorper.
+                </p>
+                <p>
+                    Mauris nibh erat, rutrum rhoncus sagittis sit amet, laoreet eget augue. Pellentesque eleifend eget lacus ut suscipit. Nulla facilisi. Proin finibus leo arcu, nec vehicula velit pulvinar vel. Integer eget orci malesuada, imperdiet nisl vitae, dapibus felis. Pellentesque et dui eros. Etiam tincidunt turpis elit. Sed cursus commodo mollis. Sed malesuada in sem et molestie. Nunc sed tempor nisi. Morbi pulvinar imperdiet diam, non dictum nisi maximus non. 
+                </p>
+            </section>
+            <section>
+                <h1>Configuration</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec turpis elit, eleifend sed velit a, feugiat pulvinar purus. Nunc id mi ac massa sodales aliquam. Morbi egestas quam sed dolor porttitor, quis eleifend dolor suscipit. Mauris sapien lorem, vulputate ac eleifend non, imperdiet quis magna. Phasellus fermentum est ut nibh lacinia, vitae viverra lacus vulputate. Interdum et malesuada fames ac ante ipsum primis in faucibus. Maecenas erat diam, placerat at dignissim ut, rutrum quis turpis. Sed vulputate nulla vitae dui commodo, in euismod nisi ullamcorper.
+                </p>
+                <p>
+                    Mauris nibh erat, rutrum rhoncus sagittis sit amet, laoreet eget augue. Pellentesque eleifend eget lacus ut suscipit. Nulla facilisi. Proin finibus leo arcu, nec vehicula velit pulvinar vel. Integer eget orci malesuada, imperdiet nisl vitae, dapibus felis. Pellentesque et dui eros. Etiam tincidunt turpis elit. Sed cursus commodo mollis. Sed malesuada in sem et molestie. Nunc sed tempor nisi. Morbi pulvinar imperdiet diam, non dictum nisi maximus non. 
+                </p>
+            </section>
+            <section>
+                <h1>Example</h1>
+                <p>This is a simple exemple of implementation:</p>
+<pre>
+for (element of document.querySelectorAll('[data-title]')) {
+    let instance = new Tooltip(element);
+}
+</pre>
+                <p>Will render like this: <a data-title="I'm a tooltip ! with <strong>HTML</strong> <i>support</i>">just mouseover it !</a></p>
+                
+                <p>Or you can do something more complicated, like loadingcontent via a querySelector, and why not, special style:
+<pre>
+for (element of document.querySelectorAll('[data-title]')) {
+    let instance = new Tooltip(element, function() {
+        if (['#', '.'].indexOf(element.dataset.title[0]) === 0) {
+            return document.querySelector(element.dataset.title).innerHTML;
+        }
+        return element.dataset.title;
+    }, 'custom');
+}
+</pre>
+            </section>
+        </main>
+        <footer>
+            <a href="https://github.com/acoquoin">github.com/acoquoin</a>
+        </footer>
+        <script type="text/javascript" src="https://raw.githubusercontent.com/acoquoin/tooltip/master/tooltip.js"></script>
+        <script type="text/javascript">
+            for (element of document.querySelectorAll('[data-title]')) {
+                let instance = new Tooltip(element);
+            }
+        </script>
+    </body>
+</html>
