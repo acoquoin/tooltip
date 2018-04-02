@@ -74,6 +74,7 @@ header p button i:after {
 }
 
 section h1 { border-bottom: 2px solid #09F; }
+section h2 { font-size:16px;border-bottom:1px solid #444; }
 section p { margin-bottom: 20px; }
 section pre {
 
@@ -85,8 +86,21 @@ section pre {
     border-left:10px solid #DDD; 
     padding:20px;
     color: #666;
+    overflow:auto;
 }
 
+    #tooltip-custom {
+        color: #000;
+        background: #FFF;
+        border: 1px solid rgba(0, 0, 0, .75);
+        border-radius: 5px;
+        margin: 0;
+        box-shadow: 5px 5px 10px 0 #AAA;
+        max-width:500px;
+    }
+    #tooltip-custom::after {
+        display:none;
+    }
         </style>
     </head>
     <body>
@@ -116,6 +130,7 @@ section pre {
             </section>
             <section>
                 <h1>Example</h1>
+                <h2>Simple example</h2>
                 <p>This is a simple exemple of implementation:</p>
 <pre>
 for (element of document.querySelectorAll('[data-title]')) {
@@ -123,8 +138,8 @@ for (element of document.querySelectorAll('[data-title]')) {
 }
 </pre>
                 <p>Will render like this: <a data-title="I'm a tooltip ! with <strong>HTML</strong> <i>support</i>">just mouseover it !</a></p>
-                
-                <p>Or you can do something more complicated, like loadingcontent via a querySelector, and why not, special style:
+                <h2>Advance example</h2>
+                <p>Or, you can do something more complicated, like loadingcontent via a querySelector, and why not, special style:
 <pre>
 for (element of document.querySelectorAll('[data-title]')) {
     let instance = new Tooltip(element, function() {
@@ -135,16 +150,47 @@ for (element of document.querySelectorAll('[data-title]')) {
     }, 'custom');
 }
 </pre>
+                <p>Adding a little bit of CSS:</p>
+<pre>
+#tooltip-custom {
+    color: #000;
+    background: #FFF;
+    border: 1px solid rgba(0, 0, 0, .75);
+    border-radius: 5px;
+    margin: 0;
+    box-shadow: 5px 5px 10px 0 #AAA;
+    max-width:500px;
+}
+#tooltip-custom::after {
+    display:none;
+}
+</pre>
+                <p>And a little bit of HTML:<p>
+<pre>
+&lt;template id="custom"&gt;I'm a content into a &lt;i&gt;template&lt;/i&gt; tag, loaded by &lt;i&gt;querySelector&lt;i&gt;.&lt;/template&gt;
+</pre>
+                <p>Will render like this: <a data-title="#custom" class="custom">just mouseover it !</a></p>
+            </section>
+            <section>
+                <h1>Enjoy</h1>
+                <p>This script is under MIT licence. So feel free to edit it, fork it, customize it or destroy it if you want !</p>
             </section>
         </main>
         <footer>
             <a href="https://github.com/acoquoin">github.com/acoquoin</a>
         </footer>
+        <template id="custom">I'm a content into a <i>template</i> tag, loaded by <i>querySelector<i>.</template>
         <script type="text/javascript" src="https://cdn.rawgit.com/acoquoin/tooltip/c70c84bd/tooltip.js"></script>
         <script type="text/javascript">
             for (element of document.querySelectorAll('[data-title]')) {
                 let instance = new Tooltip(element);
             }
+            let instance = new Tooltip(document.querySelector('.custom'), function() {
+                if (['#', '.'].indexOf(element.dataset.title[0]) === 0) {
+                    return document.querySelector(document.querySelector('.custom').dataset.title).innerHTML;
+                }
+                return element.dataset.title;
+            }, 'custom');
         </script>
     </body>
 </html>
